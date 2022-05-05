@@ -1,2 +1,2 @@
 # literate-intellij-plugin
-Supports WEB programming
+WEB programming for IntelliJ Platform.
