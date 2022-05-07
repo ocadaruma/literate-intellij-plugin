@@ -1,0 +1,8 @@
+% "In limbo" TeX part
+
+@* Beginning of the module
+@d foo = 42
+@p function bar: integer;
+begin
+  bar := 43;
+end;

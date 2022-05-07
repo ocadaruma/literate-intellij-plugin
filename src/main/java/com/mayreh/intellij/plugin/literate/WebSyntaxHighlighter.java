@@ -21,7 +21,7 @@ public class WebSyntaxHighlighter extends SyntaxHighlighterBase {
             "COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
     public static final TextAttributesKey KEYWORD = createAttrKey(
-            "COMMENT", DefaultLanguageHighlighterColors.KEYWORD);
+            "KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey TEX = createAttrKey(
             "TEX", DefaultLanguageHighlighterColors.DOC_COMMENT);
     public static final TextAttributesKey DEFINITION = createAttrKey(

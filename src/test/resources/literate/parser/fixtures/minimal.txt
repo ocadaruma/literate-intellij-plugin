@@ -1,0 +1,12 @@
+FILE
+  PsiComment(COMMENT)('% "In limbo" TeX part\n\n')
+  WebModuleImpl(MODULE)
+    PsiElement(MODULE_BEGIN)('@*')
+    WebTexImpl(TEX)
+      PsiElement(TEX_PART)(' Beginning of the module\n')
+    WebDefinitionImpl(DEFINITION)
+      PsiElement(DEFINITION_PART_BEGIN)('@d')
+      PsiElement(DEFINITION_PART)(' foo = 42\n')
+    WebPascalCodeImpl(PASCAL_CODE)
+      PsiElement(PASCAL_PART_BEGIN)('@p')
+      PsiElement(PASCAL_PART)(' function bar: integer;\nbegin\n  bar := 43;\nend;')

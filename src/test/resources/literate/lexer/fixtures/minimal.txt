@@ -1,0 +1,7 @@
+COMMENT ('% "In limbo" TeX part\n\n')
+MODULE_BEGIN ('@*')
+TEX_PART (' Beginning of the module\n')
+DEFINITION_PART_BEGIN ('@d')
+DEFINITION_PART (' foo = 42\n')
+PASCAL_PART_BEGIN ('@p')
+PASCAL_PART (' function bar: integer;\nbegin\n  bar := 43;\nend;')
