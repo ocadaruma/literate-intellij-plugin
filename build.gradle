@@ -58,17 +58,17 @@ sourceSets {
 }
 
 task generateWebLexer(type: GenerateLexer) {
-    source = "src/main/grammer/web.flex"
-    targetDir = "src/gen/com/mayreh/intellij/plugin/web/lexer"
+    source = "src/main/grammar/web.flex"
+    targetDir = "src/gen/com/mayreh/intellij/plugin/literate/lexer"
     targetClass = "_WebLexer"
     purgeOldFiles = true
 }
 
 task generateWebParser(type: GenerateParser) {
-    source = "src/main/grammer/web.bnf"
+    source = "src/main/grammar/web.bnf"
     targetRoot = "src/gen"
-    pathToParser = "/com/mayreh/intellij/plugin/web/parser/WebParser.java"
-    pathToPsiRoot = "/com/mayreh/intellij/plugin/web/psi"
+    pathToParser = "/com/mayreh/intellij/plugin/literate/parser/WebParser.java"
+    pathToPsiRoot = "/com/mayreh/intellij/plugin/literate/psi"
     purgeOldFiles = true
 }
 

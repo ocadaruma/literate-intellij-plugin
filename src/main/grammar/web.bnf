@@ -1,0 +1,35 @@
+{
+    parserClass = 'com.mayreh.intellij.plugin.literate.parser.WebParser'
+    implements = 'com.mayreh.intellij.plugin.literate.psi.WebElement'
+    extends = 'com.mayreh.intellij.plugin.literate.psi.WebElementImpl'
+    elementTypeHolderClass = 'com.mayreh.intellij.plugin.literate.psi.WebElementTypes'
+    elementTypeClass = 'com.mayreh.intellij.plugin.literate.psi.WebElementType'
+    tokenTypeClass = 'com.mayreh.intellij.plugin.literate.psi.WebTokenType'
+
+    psiClassPrefix = 'Web'
+    psiImplClassSuffix = 'Impl'
+    psiPackage = 'com.mayreh.intellij.plugin.literate.psi'
+    psiImplPackage = 'com.mayreh.intellij.plugin.literate.psi.impl'
+
+    tokens = [
+        COMMENT               = 'COMMENT'
+        MODULE_BEGIN          = 'MODULE_BEGIN'
+        TEX_PART              = 'TEX_PART'
+        DEFINITION_PART       = 'DEFINITION_PART'
+        DEFINITION_PART_BEGIN = 'DEFINITION_PART_BEGIN'
+        PASCAL_PART           = 'PASCAL_PART'
+        PASCAL_PART_BEGIN     = 'PASCAL_PART_BEGIN'
+    ]
+
+    generateTokenAccessors=true
+}
+
+root ::= Module*
+
+Module ::= 'MODULE_BEGIN' Tex? Definition? PascalCode?
+
+Tex ::= 'TEX_PART'
+
+Definition ::= 'DEFINITION_PART_BEGIN' 'DEFINITION_PART'
+
+PascalCode ::= 'PASCAL_PART_BEGIN' 'PASCAL_PART'

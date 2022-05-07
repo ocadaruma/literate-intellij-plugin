@@ -1,0 +1,42 @@
+<idea-plugin>
+    <id>com.mayreh.literate-intellij-plugin</id>
+    <name>WEB</name>
+    <vendor url="https://github.com/ocadaruma">Haruki Okada</vendor>
+
+    <description><![CDATA[
+    WEB language plugin<br>
+    <em>Features:</em>
+    <ul>
+    <li>Syntax highlighting</li>
+    <li>Go to definition (Find usages)</li>
+    </ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    Please visit <a href="https://github.com/ocadaruma/literate-intellij-plugin/releases">GitHub Releases</a>
+    ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.intellij.intelliLang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType
+          name="WEB"
+          implementationClass="com.mayreh.intellij.plugin.literate.WebFileType"
+          fieldName="INSTANCE"
+          language="WEB"
+          extensions="web"/>
+        <internalFileTemplate name="WEB"/>
+        <lang.parserDefinition
+          language="WEB"
+          implementationClass="com.mayreh.intellij.plugin.literate.WebParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+          language="WEB"
+          implementationClass="com.mayreh.intellij.plugin.literate.WebSyntaxHighlighterFactory"/>
+<!--        <lang.findUsagesProvider-->
+<!--          language="WEB"-->
+<!--          implementationClass="com.mayreh.intellij.plugin.literate.WebFindUsagesProvider"/>-->
+
+    </extensions>
+</idea-plugin>
