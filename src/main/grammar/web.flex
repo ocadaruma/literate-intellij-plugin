@@ -163,12 +163,14 @@ WHITE_SPACE = " " | \t | \f | \R
 <ZZ_IN_PASCAL_STRING> {
     \'\'           {}
     \'             { yybegin(ZZ_PASCAL_PART); return WebElementTypes.PASCAL_STRING; }
+    <<EOF>>        { yybegin(ZZ_PASCAL_PART); return WebElementTypes.PASCAL_STRING; }
     [^\r\n]        {}
 }
 
 <ZZ_IN_PREPROCESSED_STRING> {
     \"\"           {}
     \"             { yybegin(ZZ_PASCAL_PART); return WebElementTypes.PREPROCESSED_STRING; }
+    <<EOF>>        { yybegin(ZZ_PASCAL_PART); return WebElementTypes.PREPROCESSED_STRING; }
     [^\r\n]        {}
 }
 
@@ -185,21 +187,25 @@ WHITE_SPACE = " " | \t | \f | \R
     // workaround for TeX group inside the comment. Only supports single-nest for now
     "{"            { yybegin(ZZ_IN_PASCAL_COMMENT_TEX_GROUP); }
     "}"            { yybegin(ZZ_PASCAL_PART); return WebElementTypes.COMMENT; }
+    <<EOF>>        { yybegin(ZZ_PASCAL_PART); return WebElementTypes.COMMENT; }
     [^]            {}
 }
 
 <ZZ_IN_PASCAL_COMMENT_TEX_GROUP> {
     "}"            { yybegin(ZZ_IN_PASCAL_COMMENT); }
+    <<EOF>>        { yybegin(ZZ_IN_PASCAL_COMMENT); }
     [^]            {}
 }
 
 <ZZ_IN_PASCAL_COMMENT_QUOTED> {
     \'             { yybegin(ZZ_IN_PASCAL_COMMENT); }
+    <<EOF>>        { yybegin(ZZ_IN_PASCAL_COMMENT); }
     [^]            {}
 }
 
 <ZZ_IN_PASCAL_COMMENT_DOUBLE_QUOTED> {
     \'\'           { yybegin(ZZ_IN_PASCAL_COMMENT); }
+    <<EOF>>        { yybegin(ZZ_IN_PASCAL_COMMENT); }
     [^]            {}
 }
 
