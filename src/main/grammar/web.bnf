@@ -129,7 +129,11 @@ IndexHint ::= ('@^' | '@.' | '@:' | '@t' | '@=') 'INDEX_HINT_TEXT'? '@>'
 
 ModulePascalPart ::= UnnamedPascalPart | NamedPascalPart
 UnnamedPascalPart ::= '@p' PascalCode
-NamedPascalPart ::= '@<' 'TEX_FRAGMENT' '@>=' PascalCode
+NamedPascalPart ::= '@<' ModuleName '@>=' PascalCode
+ModuleName ::= 'TEX_FRAGMENT' {
+    implements = 'com.mayreh.intellij.plugin.literate.psi.ext.WebModuleNameElement'
+    mixin = 'com.mayreh.intellij.plugin.literate.psi.ext.WebModuleNameImplMixin'
+}
 PascalCode ::= ('PASCAL_PART'
               | PascalReference
               | 'OCTAL_CONSTANT'
@@ -138,7 +142,11 @@ PascalCode ::= ('PASCAL_PART'
               | 'PREPROCESSED_STRING'
               | IndexHint
               | PascalReserved)*
-PascalReference ::= '@<' 'TEX_FRAGMENT' '@>'
+PascalReference ::= '@<' ModuleReferenceName '@>'
+ModuleReferenceName ::= 'TEX_FRAGMENT' {
+    implements = 'com.mayreh.intellij.plugin.literate.psi.ext.WebModuleReferenceNameElement'
+    mixin = 'com.mayreh.intellij.plugin.literate.psi.ext.WebModuleReferenceNameImplMixin'
+}
 
 private PascalReserved ::=
           'and'
