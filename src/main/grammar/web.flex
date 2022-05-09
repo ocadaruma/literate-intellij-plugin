@@ -106,6 +106,43 @@ WHITE_SPACE = " " | \t | \f | \R
     "@#"              { return WebElementTypes.COMMENT; }
     "@;"              { return WebElementTypes.COMMENT; }
 
+// TODO
+//    "and"             { return WebElementTypes.PASCAL_KEYWORD_AND; }
+//    "array"           { return WebElementTypes.PASCAL_KEYWORD_ARRAY; }
+//    "begin"           { return WebElementTypes.PASCAL_KEYWORD_BEGIN; }
+//    "case"            { return WebElementTypes.PASCAL_KEYWORD_CASE; }
+//    "const"           { return WebElementTypes.PASCAL_KEYWORD_CONST; }
+//    "div"             { return WebElementTypes.PASCAL_KEYWORD_DIV; }
+//    "do"              { return WebElementTypes.PASCAL_KEYWORD_DO; }
+//    "downto"          { return WebElementTypes.PASCAL_KEYWORD_DOWNTO; }
+//    "else"            { return WebElementTypes.PASCAL_KEYWORD_ELSE; }
+//    "end"             { return WebElementTypes.PASCAL_KEYWORD_END; }
+//    "file"            { return WebElementTypes.PASCAL_KEYWORD_FILE; }
+//    "for"             { return WebElementTypes.PASCAL_KEYWORD_FOR; }
+//    "function"        { return WebElementTypes.PASCAL_KEYWORD_FUNCTION; }
+//    "goto"            { return WebElementTypes.PASCAL_KEYWORD_GOTO; }
+//    "if"              { return WebElementTypes.PASCAL_KEYWORD_IF; }
+//    "in"              { return WebElementTypes.PASCAL_KEYWORD_IN; }
+//    "label"           { return WebElementTypes.PASCAL_KEYWORD_LABEL; }
+//    "mod"             { return WebElementTypes.PASCAL_KEYWORD_MOD; }
+//    "nil"             { return WebElementTypes.PASCAL_KEYWORD_NIL; }
+//    "not"             { return WebElementTypes.PASCAL_KEYWORD_NOT; }
+//    "of"              { return WebElementTypes.PASCAL_KEYWORD_OF; }
+//    "or"              { return WebElementTypes.PASCAL_KEYWORD_OR; }
+//    "packed"          { return WebElementTypes.PASCAL_KEYWORD_PACKED; }
+//    "procedure"       { return WebElementTypes.PASCAL_KEYWORD_PROCEDURE; }
+//    "program"         { return WebElementTypes.PASCAL_KEYWORD_PROGRAM; }
+//    "record"          { return WebElementTypes.PASCAL_KEYWORD_RECORD; }
+//    "repeat"          { return WebElementTypes.PASCAL_KEYWORD_REPEAT; }
+//    "set"             { return WebElementTypes.PASCAL_KEYWORD_SET; }
+//    "then"            { return WebElementTypes.PASCAL_KEYWORD_THEN; }
+//    "to"              { return WebElementTypes.PASCAL_KEYWORD_TO; }
+//    "type"            { return WebElementTypes.PASCAL_KEYWORD_TYPE; }
+//    "until"           { return WebElementTypes.PASCAL_KEYWORD_UNTIL; }
+//    "var"             { return WebElementTypes.PASCAL_KEYWORD_VAR; }
+//    "while"           { return WebElementTypes.PASCAL_KEYWORD_WHILE; }
+//    "with"            { return WebElementTypes.PASCAL_KEYWORD_WITH; }
+
     "@^"              { yybegin(ZZ_INDEX_HINT_IN_PASCAL); return WebElementTypes.CONTROL_CODE_AT_CARET; }
     "@."              { yybegin(ZZ_INDEX_HINT_IN_PASCAL); return WebElementTypes.CONTROL_CODE_AT_CARET; }
     "@:"              { yybegin(ZZ_INDEX_HINT_IN_PASCAL); return WebElementTypes.CONTROL_CODE_AT_COLON; }

@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
+import com.mayreh.intellij.plugin.literate.lexer.TokenSets;
 import com.mayreh.intellij.plugin.literate.lexer.WebLexer;
 import com.mayreh.intellij.plugin.literate.psi.WebElementTypes;
 
@@ -62,19 +63,8 @@ public class WebSyntaxHighlighter extends SyntaxHighlighterBase {
             tokenType.equals(WebElementTypes.HEX_CONSTANT)) {
             return pack(NUMBER);
         }
-        if (tokenType.equals(WebElementTypes.CONTROL_CODE_UNSTARRED_MODULE) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_STARRED_MODULE) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_MACRO_DEFINITION) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_FORMAT_DEFINITION) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_UNNAMED_PASCAL) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_NAMED_PASCAL) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_GT) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_PASCAL_DEFINITION) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_CARET) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_DOT) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_COLON) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_T) ||
-            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_EQ)) {
+        if (TokenSets.CONTROL_CODES.contains(tokenType) ||
+            TokenSets.PASCAL_RESERVED_WORDS.contains(tokenType)) {
             return pack(KEYWORD);
         }
         return TextAttributesKey.EMPTY_ARRAY;
