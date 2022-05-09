@@ -13,7 +13,10 @@ public class WebLexer extends LayeredLexer {
                 TokenSet.create(
                         WebElementTypes.COMMENT,
                         WebElementTypes.TEX_PART,
+                        WebElementTypes.TEX_FRAGMENT,
                         WebElementTypes.DEFINITION_PART,
-                        WebElementTypes.PASCAL_PART)));
+                        WebElementTypes.PASCAL_PART,
+                        WebElementTypes.PASCAL_FRAGMENT,
+                        WebElementTypes.INDEX_HINT_TEXT)));
     }
 }

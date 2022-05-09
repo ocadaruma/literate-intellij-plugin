@@ -29,6 +29,12 @@ public class WebSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey PASCAL = createAttrKey(
             "PASCAL", DefaultLanguageHighlighterColors.IDENTIFIER);
 
+    public static final TextAttributesKey STRING = createAttrKey(
+            "STRING", DefaultLanguageHighlighterColors.STRING);
+
+    public static final TextAttributesKey NUMBER = createAttrKey(
+            "Number", DefaultLanguageHighlighterColors.NUMBER);
+
     @Override
     public @NotNull Lexer getHighlightingLexer() {
         return new WebLexer();
@@ -48,9 +54,27 @@ public class WebSyntaxHighlighter extends SyntaxHighlighterBase {
         if (tokenType.equals(WebElementTypes.PASCAL_PART)) {
             return pack(PASCAL);
         }
-        if (tokenType.equals(WebElementTypes.MODULE_BEGIN) ||
-            tokenType.equals(WebElementTypes.DEFINITION_PART_BEGIN) ||
-            tokenType.equals(WebElementTypes.PASCAL_PART_BEGIN)) {
+        if (tokenType.equals(WebElementTypes.PASCAL_STRING) ||
+            tokenType.equals(WebElementTypes.PREPROCESSED_STRING)) {
+            return pack(STRING);
+        }
+        if (tokenType.equals(WebElementTypes.OCTAL_CONSTANT) ||
+            tokenType.equals(WebElementTypes.HEX_CONSTANT)) {
+            return pack(NUMBER);
+        }
+        if (tokenType.equals(WebElementTypes.CONTROL_CODE_UNSTARRED_MODULE) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_STARRED_MODULE) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_MACRO_DEFINITION) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_FORMAT_DEFINITION) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_UNNAMED_PASCAL) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_NAMED_PASCAL) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_GT) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_PASCAL_DEFINITION) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_CARET) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_DOT) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_COLON) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_T) ||
+            tokenType.equals(WebElementTypes.CONTROL_CODE_AT_EQ)) {
             return pack(KEYWORD);
         }
         return TextAttributesKey.EMPTY_ARRAY;

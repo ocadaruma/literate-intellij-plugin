@@ -13,23 +13,128 @@
 
     tokens = [
         COMMENT               = 'COMMENT'
-        MODULE_BEGIN          = 'MODULE_BEGIN'
+        IDENTIFIER            = 'IDENTIFIER'
         TEX_PART              = 'TEX_PART'
+        TEX_FRAGMENT          = 'TEX_FRAGMENT'
         DEFINITION_PART       = 'DEFINITION_PART'
-        DEFINITION_PART_BEGIN = 'DEFINITION_PART_BEGIN'
         PASCAL_PART           = 'PASCAL_PART'
-        PASCAL_PART_BEGIN     = 'PASCAL_PART_BEGIN'
+        PASCAL_FRAGMENT       = 'PASCAL_FRAGMENT'
+
+        SYMBOL_HASH           = '#'
+        SYMBOL_EQ             = '='
+        SYMBOL_EQEQ           = '=='
+        SYMBOL_BAR            = '|'
+        SYMBOL_SEMICOLON      = ';'
+        SYMBOL_PLUS           = '+'
+        SYMBOL_DASH           = '-'
+        SYMBOL_ASTER          = '*'
+        SYMBOL_SLASH          = '/'
+        SYMBOL_LT             = '<'
+        SYMBOL_GT             = '>'
+        SYMBOL_LSQBRACKET     = '['
+        SYMBOL_RSQBRACKET     = ']'
+        SYMBOL_DOT            = '.'
+        SYMBOL_DOTDOT         = '..'
+        SYMBOL_COMMA          = ','
+        SYMBOL_COLON          = ':'
+        SYMBOL_LPAREN         = '('
+        SYMBOL_RPAREN         = ')'
+
+        OCTAL_CONSTANT        = 'OCTAL_CONSTANT'
+        HEX_CONSTANT          = 'HEX_CONSTANT'
+        INDEX_HINT_TEXT       = 'INDEX_HINT_TEXT'
+
+        CONTROL_CODE_AT       = '@@'
+        CONTROL_CODE_UNSTARRED_MODULE  = '@ '
+        CONTROL_CODE_STARRED_MODULE    = '@*'
+        CONTROL_CODE_MACRO_DEFINITION  = '@d'
+        CONTROL_CODE_FORMAT_DEFINITION = '@f'
+        CONTROL_CODE_UNNAMED_PASCAL    = '@p'
+        CONTROL_CODE_NAMED_PASCAL      = '@<'
+        CONTROL_CODE_AT_GT             = '@>'
+        CONTROL_CODE_PASCAL_DEFINITION = '@>='
+        CONTROL_CODE_OCTAL             = "@'"
+        CONTROL_CODE_HEX               = '@"'
+        CONTROL_CODE_AMP               = '@&'
+        CONTROL_CODE_UNDERLINE_INDEX   = '@!'
+
+        CONTROL_CODE_AT_CARET          = '@^'
+        CONTROL_CODE_AT_DOT            = '@.'
+        CONTROL_CODE_AT_COLON          = '@:'
+        CONTROL_CODE_AT_T              = '@t'
+        CONTROL_CODE_AT_EQ             = '@='
+
+        CONTROL_CODE_OTHER = '@;' // actually, any control codes other than above will be classified to this (e.g. @#)
+
+        // refs: https://wiki.freepascal.org/Standard_Pascal#Reserved_Words
+        PASCAL_KEYWORD_AND       = 'and'
+        PASCAL_KEYWORD_ARRAY     = 'array'
+        PASCAL_KEYWORD_BEGIN     = 'begin'
+        PASCAL_KEYWORD_CASE      = 'case'
+        PASCAL_KEYWORD_CONST     = 'const'
+        PASCAL_KEYWORD_DIV       = 'div'
+        PASCAL_KEYWORD_DO        = 'do'
+        PASCAL_KEYWORD_DOWNTO    = 'downto'
+        PASCAL_KEYWORD_ELSE      = 'else'
+        PASCAL_KEYWORD_END       = 'end'
+        PASCAL_KEYWORD_FILE      = 'file'
+        PASCAL_KEYWORD_FOR       = 'for'
+        PASCAL_KEYWORD_FUNCTION  = 'function'
+        PASCAL_KEYWORD_GOTO      = 'goto'
+        PASCAL_KEYWORD_IF        = 'if'
+        PASCAL_KEYWORD_IN        = 'in'
+        PASCAL_KEYWORD_LABEL     = 'label'
+        PASCAL_KEYWORD_MOD       = 'mod'
+        PASCAL_KEYWORD_NIL       = 'nil'
+        PASCAL_KEYWORD_NOT       = 'not'
+        PASCAL_KEYWORD_OF        = 'of'
+        PASCAL_KEYWORD_OR        = 'or'
+        PASCAL_KEYWORD_PACKED    = 'packed'
+        PASCAL_KEYWORD_PROCEDURE = 'procedure'
+        PASCAL_KEYWORD_PROGRAM   = 'program'
+        PASCAL_KEYWORD_RECORD    = 'record'
+        PASCAL_KEYWORD_REPEAT    = 'repeat'
+        PASCAL_KEYWORD_SET       = 'set'
+        PASCAL_KEYWORD_THEN      = 'then'
+        PASCAL_KEYWORD_TO        = 'to'
+        PASCAL_KEYWORD_TYPE      = 'type'
+        PASCAL_KEYWORD_UNTIL     = 'until'
+        PASCAL_KEYWORD_VAR       = 'var'
+        PASCAL_KEYWORD_WHILE     = 'while'
+        PASCAL_KEYWORD_WITH      = 'with'
+
+        PASCAL_NOTEQ             = '<>'
+        PASCAL_LTEQ              = '<='
+        PASCAL_GTEQ              = '>='
+        PASCAL_BECOMES           = ':='
+
+        PASCAL_STRING            = 'PASCAL_STRING'
+        PREPROCESSED_STRING      = 'PREPROCESSED_STRING'
     ]
 
     generateTokenAccessors=true
 }
 
-root ::= Module*
+root ::= TexInLimbo? Module*
 
-Module ::= 'MODULE_BEGIN' Tex? Definition? PascalCode?
+TexInLimbo ::= Tex
 
-Tex ::= 'TEX_PART'
+Module ::= ('@ ' | '@*') Tex? Definition? ModulePascalPart?
 
-Definition ::= 'DEFINITION_PART_BEGIN' 'DEFINITION_PART'
+Tex ::= ('TEX_PART' | IndexHint)+
 
-PascalCode ::= 'PASCAL_PART_BEGIN' 'PASCAL_PART'
+Definition ::= (('@d' | '@f') 'DEFINITION_PART'*)+
+
+IndexHint ::= ('@^' | '@.' | '@:' | '@t' | '@=') 'INDEX_HINT_TEXT'? '@>'
+
+ModulePascalPart ::= UnnamedPascalPart | NamedPascalPart
+UnnamedPascalPart ::= '@p' PascalCode
+NamedPascalPart ::= '@<' 'TEX_FRAGMENT' '@>=' PascalCode
+PascalCode ::= ('PASCAL_PART'
+              | PascalReference
+              | 'OCTAL_CONSTANT'
+              | 'HEX_CONSTANT'
+              | 'PASCAL_STRING'
+              | 'PREPROCESSED_STRING'
+              | IndexHint)*
+PascalReference ::= '@<' 'TEX_FRAGMENT' '@>'
