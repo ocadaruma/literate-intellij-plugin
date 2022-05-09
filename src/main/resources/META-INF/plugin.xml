@@ -8,7 +8,7 @@
     <em>Features:</em>
     <ul>
     <li>Syntax highlighting</li>
-    <li>Go to definition (Find usages)</li>
+    <li>Go to module declaration</li>
     </ul>
     ]]></description>
 
@@ -34,9 +34,8 @@
         <lang.syntaxHighlighterFactory
           language="WEB"
           implementationClass="com.mayreh.intellij.plugin.literate.WebSyntaxHighlighterFactory"/>
-<!--        <lang.findUsagesProvider-->
-<!--          language="WEB"-->
-<!--          implementationClass="com.mayreh.intellij.plugin.literate.WebFindUsagesProvider"/>-->
-
+        <lang.findUsagesProvider
+          language="WEB"
+          implementationClass="com.mayreh.intellij.plugin.literate.WebFindUsagesProvider"/>
     </extensions>
 </idea-plugin>
