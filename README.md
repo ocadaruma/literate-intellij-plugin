@@ -1,6 +1,7 @@
 # literate-intellij-plugin
 
 [![CI](https://github.com/ocadaruma/literate-intellij-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/ocadaruma/literate-intellij-plugin/actions/workflows/ci.yml)
+[![plugin](https://img.shields.io/jetbrains/plugin/v/19130-literate)](https://plugins.jetbrains.com/plugin/19130-literate)
 
 WEB programming in IntelliJ Platform.
 
