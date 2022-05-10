@@ -1,10 +1,10 @@
 <idea-plugin>
     <id>com.mayreh.literate-intellij-plugin</id>
-    <name>WEB</name>
+    <name>Literate</name>
     <vendor url="https://github.com/ocadaruma">Haruki Okada</vendor>
 
     <description><![CDATA[
-    WEB language plugin<br>
+    WEB literate programming language plugin<br>
     <em>Features:</em>
     <ul>
     <li>Syntax highlighting</li>
